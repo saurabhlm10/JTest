@@ -1,0 +1,21 @@
+We handle errors in Nodejs/Express app using the try catch method.
+
+for example:
+
+const functionName = async (req, res) => {
+    try {
+        await DB.command(something)
+
+        res.status(200).send('OK')
+    } catch (error) {
+        console.log(error)
+        res.status(400).json(error)
+    } finally {
+        console.log('Request Done')
+    }
+}
+
+Here, if we don't handle the error while making an DB request, the program will stop running and hence the backend will not be able to handle any more requests even to other routes. This makes the development smoother and more reliable. Ensuring that errors in a single route don't interfere with other routes and the other routes work fine.
+
+Here, first the try block is executed and if any errors are present, they will be treated in the catch block accordingly
+The finally block is used to run some code which should run regardless of whether the execution of the try is successful of not.

@@ -1,0 +1,40 @@
+console.log(('Start'))
+
+setTimeout(() => {
+    console.log('Timeout')
+}, 0);
+
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise 1 resolved')
+    }, 1000);
+})
+
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise 2 resolved')
+    }, 2000);
+})
+const promise3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise 3 resolved')
+    }, 0);
+})
+
+promise1.then(result => console.log(result))
+promise2.then(result => console.log(result))
+promise3.then(result => console.log(result))
+
+console.log('End')
+
+Output: 
+Start
+End
+Timeout
+Promise 3 resolved
+Promise 1 resolved
+Promise 2 resolved
+
+1. When the program starts, Start is printed
+2. End is printed because the first setTimeout is pushed onto the callstack but is resolved once the rest of the program is run. All setTimeouts follow the same procedure. Hence why, after the first setTimeout is resolved, the other 3 promises are resolved according to their timeouts. i.e, Promise 3, Promise 1 then Promise 2 because Promise 3 has 0 timeout, Promise 1 has 1000 and Promise 2 has 2000
+3. In short, timeouts start running after the whole program has finished running

@@ -1,0 +1,23 @@
+Callback hell refers to a situation in JavaScript programming where multiple asynchronous operations are nested within each other, resulting in complex and hard-to-read code. It occurs when callbacks are used to handle the outcomes of asynchronous tasks, and those tasks depend on each other or need to be executed in a specific order.
+
+function1(function (result1) {
+  // Something
+  function2(function (result2) {
+        // Something
+    function3(function (result3) {
+        // Something
+
+      function4(function (result4) {
+            // Something
+        
+        function5(function (result5) {
+            // Something
+
+        });
+      });
+    });
+  });
+});
+
+
+Here, each function depends on the nested parent function.
